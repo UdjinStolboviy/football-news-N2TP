@@ -10,23 +10,14 @@ import {
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {Colors} from '../../../utils/colors';
-import {Fonts} from '../../../utils/fonts';
-import {Texts} from '../../../utils/texts';
-import {useNavigation} from '@react-navigation/native';
-import {InitializationService} from '../../../service/initializer/initialization-service';
 import {useInjection} from 'inversify-react';
 import {Types} from '../../../ioc/types';
-import {InitializationStorage} from '../../../mobx/storage/initialization-storage';
 
-import {Button, Card, Icon} from '@rneui/themed';
-import {ApiService} from '../../../service/api/api';
 import {observer} from 'mobx-react';
-import {ButtonText} from '../../common/button/ButtonText';
 import {InputView} from '../../common/input/InputView';
 
-import {NavigatorConstants} from '../../../utils/navigator-constants';
 import {PeopleStorage} from '../../../mobx/storage/sw-people-store';
-import {ButtonLike} from '../../common/button/ButtonLike';
+
 import {People} from '../../../mobx/dto/people';
 import {PeopleCardView} from '../../common/PeopleCardView';
 import {FansView} from '../../common/FansView';

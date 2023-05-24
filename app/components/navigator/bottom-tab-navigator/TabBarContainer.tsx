@@ -9,9 +9,9 @@ import Animated from 'react-native-reanimated';
 import {Navigator} from '../../../service/navigator/navigator';
 import {NavigatorConstants} from '../../../utils/navigator-constants';
 
-import {Button} from '@rneui/themed';
 import {useNavigation} from '@react-navigation/native';
 import {PeopleStorage} from '../../../mobx/storage/sw-people-store';
+import {ButtonText} from '../../common/button/ButtonText';
 
 export interface TabBarContainerProps {
   children: React.ReactElement | React.ReactElement[];
@@ -27,10 +27,10 @@ export const TabBarContainer = observer((props: TabBarContainerProps) => {
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.mainWrapper]}>
-        <Button
-          title={'CLEAR FANS'}
+        <ButtonText
+          text={'CLEAR FANS'}
           onPress={() => peopleStorege.clear()}
-          containerStyle={{
+          style={{
             width: 200,
           }}
         />

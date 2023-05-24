@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Card, Icon} from '@rneui/themed';
 import {People} from '../../mobx/dto/people';
 import {Text} from 'react-native';
 import {ButtonLike} from './button/ButtonLike';
@@ -45,44 +44,10 @@ export const PeopleCardView = observer(({people}: PeopleCardViewProps) => {
   };
 
   return (
-    <Card containerStyle={{borderRadius: 20}}>
-      <Card.Title>{people.getName()}</Card.Title>
-      <Card.Divider />
-      <Card.Image
-        style={{padding: 0}}
-        resizeMode="contain"
-        source={require('../../../assets/img/sword.jpeg')}
-      />
-      <ButtonLike onPress={onPressLike} favorie={favorite} />
-      <Text
-        style={{
-          margin: 20,
-          width: 200,
-        }}>{`Gender: ${people.getGender()}`}</Text>
-
-      <Button
-        onPress={() =>
-          // @ts-ignore
-          navigation.navigate(NavigatorConstants.PEOPLE_SCREEN, {
-            people: people,
-          })
-        }
-        icon={
-          <Icon
-            name="code"
-            color="#ffffff"
-            iconStyle={{marginRight: 10}}
-            // onPress={}
-          />
-        }
-        buttonStyle={{
-          borderRadius: 10,
-          marginLeft: 0,
-          marginRight: 0,
-          marginBottom: 0,
-        }}
-        title="VIEW"
-      />
-    </Card>
+    <Text
+      style={{
+        margin: 20,
+        width: 200,
+      }}>{`Gender: ${people.getGender()}`}</Text>
   );
 });

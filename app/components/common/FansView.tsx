@@ -7,7 +7,6 @@ import {
   View,
 } from 'react-native';
 
-import {Icon} from '@rneui/themed';
 import {Colors} from '../../utils/colors';
 
 export interface FansViewProps {

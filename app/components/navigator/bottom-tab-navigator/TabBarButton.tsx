@@ -4,8 +4,7 @@ import {NavigationStorage} from '../../../mobx/storage/navigation-storage';
 import {useInjection} from 'inversify-react';
 import {Types} from '../../../ioc/types';
 import {observer} from 'mobx-react';
-
-import {Button} from '@rneui/themed';
+import {ButtonText} from '../../common/button/ButtonText';
 
 interface TabButtonProps {
   routeName: string;
@@ -25,10 +24,10 @@ export const TabButton = observer((props: TabButtonProps) => {
 
   if (props.routeName === NavigatorConstants.TEST2_TAB) {
     return (
-      <Button
-        title={props.routeName}
+      <ButtonText
+        text={props.routeName}
         onPress={onPress}
-        containerStyle={{
+        style={{
           width: 20,
           marginHorizontal: 50,
           marginVertical: 10,
@@ -38,10 +37,10 @@ export const TabButton = observer((props: TabButtonProps) => {
   }
   if (props.routeName === NavigatorConstants.TEST3_TAB) {
     return (
-      <Button
-        title={props.routeName}
+      <ButtonText
+        text={props.routeName}
         onPress={onPress}
-        containerStyle={{
+        style={{
           width: 20,
           marginHorizontal: 50,
           marginVertical: 10,
@@ -50,10 +49,10 @@ export const TabButton = observer((props: TabButtonProps) => {
     );
   } else {
     return (
-      <Button
-        title={props.routeName}
+      <ButtonText
+        text={props.routeName}
         onPress={onPress}
-        containerStyle={{
+        style={{
           width: 20,
           marginHorizontal: 50,
           marginVertical: 10,

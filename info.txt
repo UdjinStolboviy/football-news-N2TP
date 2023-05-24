@@ -1,4 +1,4 @@
-npx react-native init MyApp --template typescript
+npx react-native init MyApp 
 
  • Have an Android emulator running (quickest way to get started), or a device connected.
      npx react-native run-android

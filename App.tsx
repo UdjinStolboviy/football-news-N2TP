@@ -13,8 +13,6 @@ import {StyleSheet} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Provider} from 'inversify-react';
 
-import {Button, Icon} from '@rneui/themed';
-
 import container from './app/ioc/container';
 import {Types} from './app/ioc/types';
 import {InitializationService} from './app/service/initializer/initialization-service';
