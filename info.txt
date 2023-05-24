@@ -1,0 +1,15 @@
+npx react-native init MyApp --template typescript
+
+ • Have an Android emulator running (quickest way to get started), or a device connected.
+     npx react-native run-android
+  
+  Run instructions for iOS:
+    npx react-native run-ios
+    - or -
+    • Open in Xcode or run "xed -b ios"
+    • Hit the Run button
+    
+  Run instructions for macOS:
+    • See https://aka.ms/ReactNativeGuideMacOS for the latest up-to-date instructions.
+    
+    'X-RapidAPI-Key': '38e4bc24fbmshd4e9a9bd4ca6714p115d6fjsn271619dce665',
