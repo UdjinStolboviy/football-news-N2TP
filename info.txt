@@ -13,3 +13,7 @@ npx react-native init MyApp
     • See https://aka.ms/ReactNativeGuideMacOS for the latest up-to-date instructions.
     
     'X-RapidAPI-Key': '38e4bc24fbmshd4e9a9bd4ca6714p115d6fjsn271619dce665',
+
+    апі новин
+https://newsapi.org/
+Your API key is: 335db48143244d828d000a78c5b9c35d

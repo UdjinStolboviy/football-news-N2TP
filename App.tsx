@@ -27,8 +27,8 @@ const App = () => {
   const [initialRouteName, setInitialRouteName] = useState<string | null>(null);
 
   useEffect(() => {
-    createClientDate().then((dbClientCreated: boolean) => {
-      if (dbClientCreated) {
+    createClientDate().then((сlientCreated: boolean) => {
+      if (сlientCreated) {
         initialize();
       }
     });
@@ -38,13 +38,16 @@ const App = () => {
     try {
       setDependencies(container);
       setInitialRouteName(NavigatorConstants.INITIAL_STACK);
+      console.log('createClientDate');
       setTimeout(() => {
         SplashScreen.hide();
-      }, 500);
+      }, 100);
       return true;
     } catch (e) {
       setInitialRouteName(NavigatorConstants.ERROR_STACK);
       setDependencies(container);
+
+      console.log('createClientDateError');
       SplashScreen.hide();
       return false;
     }

@@ -23,6 +23,8 @@ export const RootNavigationContainer = (
 ) => {
   const navigator: Navigator = useInjection(Types.Navigator);
 
+  console.log('RootNavigationContainer', props.initialRouteName);
+
   return (
     <NavigationContainer ref={ref => navigator.setNavigator(ref)}>
       <Stack.Navigator initialRouteName={props.initialRouteName}>

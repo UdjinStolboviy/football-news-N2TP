@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
   View,
+  ImageBackground,
 } from 'react-native';
 import {Colors} from '../../../utils/colors';
 import {observer} from 'mobx-react';
@@ -16,7 +17,9 @@ import {useInjection} from 'inversify-react';
 import {Types} from '../../../ioc/types';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 
+import {UIActivityIndicator} from 'react-native-indicators';
 import {NavigatorConstants} from '../../../utils/navigator-constants';
+import {Environment} from '../../../config/Environment';
 
 const {StatusBarManager} = NativeModules;
 
@@ -34,13 +37,13 @@ export const InitialScreen = observer(() => {
   }, [initializationSuccessful]);
 
   const checkInitializationStatus = () => {
-    if (initializationSuccessful !== null) {
-      if (initializationSuccessful) {
-        navigation.navigate(NavigatorConstants.BOTTOM_TAB_STACK as never);
-      } else {
-        navigation.navigate(NavigatorConstants.ERROR_STACK as never);
-      }
-    }
+    // if (initializationSuccessful !== null) {
+    //   if (initializationSuccessful) {
+    //     navigation.navigate(NavigatorConstants.BOTTOM_TAB_STACK as never);
+    //   } else {
+    //     navigation.navigate(NavigatorConstants.ERROR_STACK as never);
+    //   }
+    // }
   };
 
   return (
@@ -50,8 +53,15 @@ export const InitialScreen = observer(() => {
         backgroundColor="transparent"
         barStyle="light-content"
       />
+      <ImageBackground
+        source={require('./../../../../assets/img/splash_1_1.png')}
+        style={styles.img}
+      />
+      <View style={styles.wrapperText}>
+        <Text style={styles.loaderText}>{Environment.getName()}</Text>
+      </View>
       <View style={styles.loaderContainer}>
-        <Text style={styles.loaderText}>InitScreen</Text>
+        <UIActivityIndicator color="white" />
       </View>
     </View>
   );
@@ -60,7 +70,6 @@ export const InitialScreen = observer(() => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffff',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -68,13 +77,26 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    height: '50%',
+    height: '10%',
+    paddingBottom: '14%',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  wrapperText: {
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+    height: '40%',
     paddingBottom: '14%',
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
   loaderText: {
-    color: Colors.B3B3B3,
+    color: Colors.C00509A,
     fontSize: 16,
+  },
+  img: {
+    width: '100%',
+    height: '100%',
   },
 });
