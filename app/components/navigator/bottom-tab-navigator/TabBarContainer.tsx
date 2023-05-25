@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Platform, StyleSheet, View} from 'react-native';
 import {ComponentSize} from '../../../utils/component-size';
 import {Colors} from '../../../utils/colors';
 import {observer} from 'mobx-react';
@@ -12,6 +12,7 @@ import {NavigatorConstants} from '../../../utils/navigator-constants';
 import {useNavigation} from '@react-navigation/native';
 import {PeopleStorage} from '../../../mobx/storage/sw-people-store';
 import {ButtonText} from '../../common/button/ButtonText';
+import {ButtonNawTab} from '../../common/button/ButtonNawTab';
 
 export interface TabBarContainerProps {
   children: React.ReactElement | React.ReactElement[];
@@ -19,6 +20,7 @@ export interface TabBarContainerProps {
 
 export const TabBarContainer = observer((props: TabBarContainerProps) => {
   const navigator: Navigator = useInjection(Types.Navigator);
+  const [activeNumber, setActiveNumber] = React.useState(0);
   const navigation = useNavigation();
   const peopleStorege: PeopleStorage = useInjection(Types.PeopleStorage);
 
@@ -26,49 +28,39 @@ export const TabBarContainer = observer((props: TabBarContainerProps) => {
 
   return (
     <View style={styles.container}>
-      <Animated.View style={[styles.mainWrapper]}>
-        <ButtonText
-          text={'CLEAR FANS'}
-          onPress={() => peopleStorege.clear()}
-          style={{
-            width: 200,
-          }}
-        />
-      </Animated.View>
+      <ButtonNawTab
+        buttonNumber={0}
+        onPress={() => {
+          setActiveNumber(0);
+          navigation.navigate(NavigatorConstants.MAIN_SCREEN as never);
+        }}
+        activeNumber={activeNumber}
+      />
+      <ButtonNawTab
+        buttonNumber={1}
+        onPress={() => {
+          setActiveNumber(1);
+          navigation.navigate(NavigatorConstants.BEST_PLAYERS_SCREEN as never);
+        }}
+        activeNumber={activeNumber}
+      />
+      <ButtonNawTab
+        buttonNumber={2}
+        onPress={() => {
+          setActiveNumber(2);
+          navigation.navigate(NavigatorConstants.FAVORITE_SCREEN as never);
+        }}
+        activeNumber={activeNumber}
+      />
     </View>
   );
 });
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'center',
-    width: ComponentSize.TAB_BAR_WIDTH,
-    height: ComponentSize.TAB_BAR_HEIGHT,
-    bottom: 34,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-  },
-  mainWrapper: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    bottom: 0,
-    right: 0,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    elevation: 10,
-    shadowRadius: 13,
-    shadowColor: 'rgb(45, 47, 49)',
-    shadowOpacity: 0.24,
+    width: '100%',
     flexDirection: 'row',
-    paddingVertical: 4,
-    borderRadius: 70,
-    backgroundColor: Colors.FFFFFF,
-    opacity: 1,
-    zIndex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'space-around',
+    backgroundColor: Colors.OFOFOFO,
+    paddingBottom: Platform.OS === 'ios' ? 20 : 0,
   },
 });

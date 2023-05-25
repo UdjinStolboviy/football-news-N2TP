@@ -42,7 +42,7 @@ export const Test2Screen = observer(() => {
   }, [inputValues]);
 
   useEffect(() => {
-    getDate();
+    // getDate();
   }, []);
 
   const renderCard = (item: People, index: number) => {

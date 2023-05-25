@@ -20,6 +20,7 @@ import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {UIActivityIndicator} from 'react-native-indicators';
 import {NavigatorConstants} from '../../../utils/navigator-constants';
 import {Environment} from '../../../config/Environment';
+import {set} from 'mobx';
 
 const {StatusBarManager} = NativeModules;
 
@@ -37,13 +38,15 @@ export const InitialScreen = observer(() => {
   }, [initializationSuccessful]);
 
   const checkInitializationStatus = () => {
-    // if (initializationSuccessful !== null) {
-    //   if (initializationSuccessful) {
-    //     navigation.navigate(NavigatorConstants.BOTTOM_TAB_STACK as never);
-    //   } else {
-    //     navigation.navigate(NavigatorConstants.ERROR_STACK as never);
-    //   }
-    // }
+    if (initializationSuccessful !== null) {
+      if (initializationSuccessful) {
+        setTimeout(() => {
+          navigation.navigate(NavigatorConstants.BOTTOM_TAB_STACK as never);
+        }, 5000);
+      } else {
+        navigation.navigate(NavigatorConstants.ERROR_STACK as never);
+      }
+    }
   };
 
   return (
@@ -86,8 +89,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: '100%',
-    height: '40%',
-    paddingBottom: '14%',
+    height: '37%',
     justifyContent: 'flex-end',
     alignItems: 'center',
   },

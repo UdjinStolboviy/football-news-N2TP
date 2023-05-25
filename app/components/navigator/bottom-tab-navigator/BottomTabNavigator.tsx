@@ -3,7 +3,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {NavigatorConstants} from '../../../utils/navigator-constants';
 import {TabBar} from './TabBar';
-import {Test3Navigator} from '../Test3Navigator';
+import {TabNavigator} from '../TabNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,10 +12,10 @@ export const BottomTabNavigator = () => {
     <Tab.Navigator
       screenOptions={{headerShown: false}}
       tabBar={TabBar}
-      initialRouteName={NavigatorConstants.TEST2_TAB}>
+      initialRouteName={NavigatorConstants.TAB_SCREEN_TAB}>
       <Tab.Screen
-        name={NavigatorConstants.TEST2_TAB}
-        component={Test3Navigator}
+        name={NavigatorConstants.TAB_SCREEN_TAB}
+        component={TabNavigator}
       />
     </Tab.Navigator>
   );

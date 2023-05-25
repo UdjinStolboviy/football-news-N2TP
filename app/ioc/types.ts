@@ -7,4 +7,5 @@ export const Types = {
   SystemModalsStorage: Symbol.for('SystemModalsStorage'),
   ApiService: Symbol.for('ApiService'),
   PeopleStorage: Symbol.for('PeopleStorage'),
+  NewsStorage: Symbol.for('NewsStorage'),
 };

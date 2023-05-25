@@ -38,7 +38,6 @@ const App = () => {
     try {
       setDependencies(container);
       setInitialRouteName(NavigatorConstants.INITIAL_STACK);
-      console.log('createClientDate');
       setTimeout(() => {
         SplashScreen.hide();
       }, 100);
@@ -47,7 +46,6 @@ const App = () => {
       setInitialRouteName(NavigatorConstants.ERROR_STACK);
       setDependencies(container);
 
-      console.log('createClientDateError');
       SplashScreen.hide();
       return false;
     }
