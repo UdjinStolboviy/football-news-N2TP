@@ -61,7 +61,7 @@ export const Test2Screen = observer(() => {
       <StatusBar
         translucent
         backgroundColor="transparent"
-        barStyle="dark-content"
+        barStyle="light-content"
       />
       <View style={styles.mainWrapper}>
         <InputView

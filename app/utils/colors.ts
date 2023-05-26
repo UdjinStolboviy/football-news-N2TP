@@ -8,5 +8,6 @@ export class Colors {
   public static readonly ACACACA: string = '#ACACAC';
   public static readonly C4E4E4E: string = '#4E4E4E';
   public static readonly C343443: string = '#343434';
+  public static readonly C474747: string = '#474747';
   public static readonly C9A9A9A: string = '#9A9A9A';
 };

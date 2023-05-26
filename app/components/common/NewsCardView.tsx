@@ -1,6 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {People} from '../../mobx/dto/people';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 import {NavigatorConstants} from '../../utils/navigator-constants';
@@ -17,7 +24,7 @@ export const NewsCardView = ({news, index}: NewsCardViewProps) => {
   const year = news.getPublishedAt().slice(0, 4);
   const month = news.getPublishedAt().slice(5, 7);
   const day = news.getPublishedAt().slice(8, 10);
-  const webUrl = news.getUrl().slice(12, 19);
+  const webUrl = news.getUrl().slice(12, 20);
   const colorBack = index % 2 !== 0 ? Colors.C9A9A9A : Colors.ACACACA;
   return (
     <View style={[styles.container, {backgroundColor: colorBack}]}>
@@ -45,7 +52,7 @@ export const NewsCardView = ({news, index}: NewsCardViewProps) => {
             flexDirection: 'row',
             justifyContent: 'flex-end',
             marginRight: -5,
-            marginTop: 5,
+            marginTop: 3,
           }}>
           <TouchableOpacity
             onPress={() =>
@@ -66,7 +73,6 @@ export const NewsCardView = ({news, index}: NewsCardViewProps) => {
 const styles = StyleSheet.create({
   container: {
     height: 88,
-
     flexDirection: 'row',
   },
   mainWrapper: {},
@@ -87,6 +93,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textButton: {
+    marginBottom: Platform.OS === 'ios' ? 0 : 5,
     fontSize: 14,
     fontWeight: '400',
     color: Colors.FFFFFF,

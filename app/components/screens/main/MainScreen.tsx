@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Pressable,
   FlatList,
   StatusBar,
   ActivityIndicator,
@@ -13,18 +12,9 @@ import React, {useEffect, useRef, useState} from 'react';
 import {Colors} from '../../../utils/colors';
 import {useInjection} from 'inversify-react';
 import {Types} from '../../../ioc/types';
-
 import {observer} from 'mobx-react';
-import {InputView} from '../../common/input/InputView';
-
-import {PeopleStorage} from '../../../mobx/storage/sw-people-store';
-
-import {People} from '../../../mobx/dto/people';
-import {PeopleCardView} from '../../common/PeopleCardView';
-import {FansView} from '../../common/FansView';
 import {HeaderView} from '../../common/HeaderView';
 import {useNavigation} from '@react-navigation/native';
-import {InitializationStorage} from '../../../mobx/storage/initialization-storage';
 import {NewsStorage} from '../../../mobx/storage/news-store';
 import {NewsCardView} from '../../common/NewsCardView';
 import {News} from '../../../mobx/dto/news';
@@ -38,8 +28,6 @@ export const MainScreen = observer(() => {
   const navigation = useNavigation();
 
   const newsStorage: NewsStorage = useInjection(Types.NewsStorage);
-
-  NewsCardView;
 
   const renderNewsCard = (item: News, index: number) => {
     return <NewsCardView news={item} key={item.getTitle()} index={index} />;
@@ -55,7 +43,7 @@ export const MainScreen = observer(() => {
       <StatusBar
         translucent
         backgroundColor="transparent"
-        barStyle="dark-content"
+        barStyle="light-content"
       />
       <HeaderView />
       <View style={styles.wrapperNews}>

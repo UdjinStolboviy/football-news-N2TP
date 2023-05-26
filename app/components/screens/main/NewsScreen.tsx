@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {createRef, useEffect, useRef, useState} from 'react';
 import {Colors} from '../../../utils/colors';
 
 import {StackScreenProps} from '@react-navigation/stack';
@@ -33,6 +33,7 @@ export const NewsScreen = ({
   const [errorShown, setErrorShown] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const counter = useRef<number>(0);
+  const webViewRef = createRef<WebView>();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -52,7 +53,8 @@ export const NewsScreen = ({
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
+      <View
+        style={[styles.container, {marginTop: Platform.OS === 'ios' ? 0 : 20}]}>
         <StatusBar
           translucent
           backgroundColor="transparent"
@@ -71,6 +73,7 @@ export const NewsScreen = ({
           {errorShown ? null : (
             <View style={[styles.webView]}>
               <WebView
+                ref={webViewRef}
                 onLoadStart={() => setLoading(true)}
                 onLoadEnd={() => setLoading(false)}
                 source={{uri: url}}
@@ -84,15 +87,19 @@ export const NewsScreen = ({
             </View>
           ) : null}
         </View>
-        <TouchableOpacity
-          style={styles.batton}
-          onPress={() => navigation.goBack()}>
+        <View style={styles.batton}>
           <View style={styles.wrapperArron}>
-            <IconArrowLeft />
-            <IconArrowRight style={{margin: 51}} />
+            <TouchableOpacity onPress={() => webViewRef.current?.goBack()}>
+              <IconArrowLeft />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => webViewRef.current?.goForward()}>
+              <IconArrowRight style={{margin: 51}} />
+            </TouchableOpacity>
           </View>
-          <IconRefresh />
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => webViewRef.current?.reload()}>
+            <IconRefresh />
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );

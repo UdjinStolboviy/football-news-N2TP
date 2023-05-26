@@ -17,7 +17,6 @@ export class NewsStorage {
 
 
     constructor() {
-        makeObservable(this);
         this.allNews = [];
 
     }
@@ -32,8 +31,7 @@ export class NewsStorage {
             const dataNews = await this.ApiService.getNews();
             dataNews.articles.forEach((item: any) => {
                 this.allNews.push(new News(item));
-            })
-            console.log('getDataNews', dataNews.articles);
+            });
 
         } catch (e) {
             console.error('getDataNews error', e);

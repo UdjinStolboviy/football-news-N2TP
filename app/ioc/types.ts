@@ -1,3 +1,4 @@
+import { BestPlayers } from './../mobx/dto/best-players';
 export const Types = {
   Navigator: Symbol.for('Navigator'),
   EnvConfig: Symbol.for('EnvConfig'),
@@ -8,4 +9,5 @@ export const Types = {
   ApiService: Symbol.for('ApiService'),
   PeopleStorage: Symbol.for('PeopleStorage'),
   NewsStorage: Symbol.for('NewsStorage'),
+  BestPlayersStorage: Symbol.for('BestPlayersStorage'),
 };

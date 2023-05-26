@@ -9,6 +9,7 @@ import { InitializationService } from '../service/initializer/initialization-ser
 import { SystemModalsStorage } from '../mobx/storage/system-modals-storage';
 import { PeopleStorage } from '../mobx/storage/sw-people-store';
 import { NewsStorage } from '../mobx/storage/news-store';
+import { BestPlayersStorage } from '../mobx/storage/best-players-store';
 
 
 
@@ -24,5 +25,6 @@ container.bind<SystemModalsStorage>(Types.SystemModalsStorage).to(SystemModalsSt
 container.bind<PeopleStorage>(Types.PeopleStorage).to(PeopleStorage).inSingletonScope();
 container.bind<Navigator>(Types.Navigator).to(Navigator).inSingletonScope();
 container.bind<NewsStorage>(Types.NewsStorage).to(NewsStorage).inSingletonScope();
+container.bind<BestPlayersStorage>(Types.BestPlayersStorage).to(BestPlayersStorage).inSingletonScope();
 
 export default container;
