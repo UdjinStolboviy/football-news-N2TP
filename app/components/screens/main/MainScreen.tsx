@@ -18,6 +18,9 @@ import {useNavigation} from '@react-navigation/native';
 import {NewsStorage} from '../../../mobx/storage/news-store';
 import {NewsCardView} from '../../common/NewsCardView';
 import {News} from '../../../mobx/dto/news';
+import {GameStorage} from '../../../mobx/storage/game-store';
+import {Game} from '../../../mobx/dto/game';
+import {GameCardView} from '../../common/GameCardView';
 
 export const MainScreen = observer(() => {
   const [
@@ -28,9 +31,14 @@ export const MainScreen = observer(() => {
   const navigation = useNavigation();
 
   const newsStorage: NewsStorage = useInjection(Types.NewsStorage);
+  const gameStorage: GameStorage = useInjection(Types.GameStorage);
 
   const renderNewsCard = (item: News, index: number) => {
     return <NewsCardView news={item} key={item.getTitle()} index={index} />;
+  };
+
+  const renderGameCard = (item: Game, index: number) => {
+    return <GameCardView game={item} key={item.getId()} index={index} />;
   };
   const paginationScreen = () => {
     if (onEndReachedCalledDuringMomentum) {
@@ -64,16 +72,14 @@ export const MainScreen = observer(() => {
         />
       </View>
 
-      <View></View>
-      {/* {false ? (
-        <View style={styles.wrapperLoad}>
-          <ActivityIndicator />
+      <View>
+        <View style={styles.textWrapper}>
+          <Text style={styles.bigText}>All Matches</Text>
         </View>
-      ) : (
         <FlatList
           disableVirtualization
-          data={[]}
-          renderItem={({item, index}) => renderCard(item, index)}
+          data={gameStorage.getAllGame()}
+          renderItem={({item, index}) => renderGameCard(item, index)}
           showsVerticalScrollIndicator={false}
           onMomentumScrollBegin={() =>
             setOnEndReachedCalledDuringMomentum(false)
@@ -81,7 +87,7 @@ export const MainScreen = observer(() => {
           onEndReachedThreshold={1}
           onEndReached={paginationScreen}
         />
-      )} */}
+      </View>
     </SafeAreaView>
   );
 });

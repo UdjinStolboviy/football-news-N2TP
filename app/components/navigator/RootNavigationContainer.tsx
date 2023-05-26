@@ -12,6 +12,7 @@ import {ErrorNavigator} from './ErrorNavigator';
 import {BottomTabNavigator} from './bottom-tab-navigator/BottomTabNavigator';
 import {PeopleScreen} from '../screens/peopleScreen';
 import {NewsScreen} from '../screens/main/NewsScreen';
+import {MatchScreen} from '../screens/main/MatchScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -50,11 +51,6 @@ export const RootNavigationContainer = (
           name={NavigatorConstants.NEWS_SCREEN}
           options={{headerShown: false, gestureEnabled: false}}
           component={NewsScreen}
-        />
-        <Stack.Screen
-          name={NavigatorConstants.PEOPLE_SCREEN}
-          options={{headerShown: false, gestureEnabled: false}}
-          component={PeopleScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

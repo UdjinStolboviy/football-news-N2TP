@@ -15,9 +15,6 @@ import {Types} from '../../../ioc/types';
 import {observer} from 'mobx-react';
 import {HeaderView} from '../../common/HeaderView';
 import {useNavigation} from '@react-navigation/native';
-import {NewsStorage} from '../../../mobx/storage/news-store';
-import {NewsCardView} from '../../common/NewsCardView';
-import {News} from '../../../mobx/dto/news';
 import {BestPlayersStorage} from '../../../mobx/storage/best-players-store';
 import {BestPlayers} from '../../../mobx/dto/best-players';
 import {BestPlayerCardView} from '../../common/BestPlayerCardView';
@@ -86,7 +83,7 @@ export const BestPlayersScreen = observer(() => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.C343443,
+    backgroundColor: Colors.C4E4E4E,
   },
 
   bigText: {

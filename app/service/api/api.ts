@@ -41,4 +41,19 @@ export class ApiService {
         return jsonData
     }
 
+    public async getGames(): Promise<any> {
+        const myHeaders = new Headers();
+        myHeaders.append("X-RapidAPI-Host", "api-football-v1.p.rapidapi.com");
+        myHeaders.append("X-RapidAPI-Key", "38e4bc24fbmshd4e9a9bd4ca6714p115d6fjsn271619dce665");
+
+        const requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        const response = await fetch('https://api-football-v1.p.rapidapi.com/v3/' + 'fixtures?season=2022&league=61', requestOptions);
+        const jsonData = await response.json();
+        return jsonData
+    }
+
 }

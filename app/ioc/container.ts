@@ -10,6 +10,7 @@ import { SystemModalsStorage } from '../mobx/storage/system-modals-storage';
 import { PeopleStorage } from '../mobx/storage/sw-people-store';
 import { NewsStorage } from '../mobx/storage/news-store';
 import { BestPlayersStorage } from '../mobx/storage/best-players-store';
+import { GameStorage } from '../mobx/storage/game-store';
 
 
 
@@ -26,5 +27,7 @@ container.bind<PeopleStorage>(Types.PeopleStorage).to(PeopleStorage).inSingleton
 container.bind<Navigator>(Types.Navigator).to(Navigator).inSingletonScope();
 container.bind<NewsStorage>(Types.NewsStorage).to(NewsStorage).inSingletonScope();
 container.bind<BestPlayersStorage>(Types.BestPlayersStorage).to(BestPlayersStorage).inSingletonScope();
+container.bind<GameStorage>(Types.GameStorage).to(GameStorage).inSingletonScope();
+
 
 export default container;

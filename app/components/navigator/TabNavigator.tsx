@@ -8,6 +8,7 @@ import {Test2Screen} from '../screens/test-screen/Test2Screen';
 import {MainScreen} from '../screens/main/MainScreen';
 import {BestPlayersScreen} from '../screens/main/BestPlayersScreen';
 import {FavoritesScreen} from '../screens/main/FavoritesScreen';
+import {MatchScreen} from '../screens/main/MatchScreen';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,10 @@ export const TabNavigator = () => {
       <Stack.Screen
         component={FavoritesScreen}
         name={NavigatorConstants.FAVORITE_SCREEN}
+      />
+      <Stack.Screen
+        name={NavigatorConstants.MATCH_SCREEN}
+        component={MatchScreen}
       />
     </Stack.Navigator>
   );

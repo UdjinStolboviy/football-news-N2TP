@@ -4,6 +4,7 @@ import { Types } from '../../ioc/types';
 import { Navigator } from '../navigator/navigator';
 import { NewsStorage } from '../../mobx/storage/news-store';
 import { BestPlayersStorage } from '../../mobx/storage/best-players-store';
+import { GameStorage } from '../../mobx/storage/game-store';
 
 @injectable()
 export class InitializationService {
@@ -11,6 +12,7 @@ export class InitializationService {
   @inject(Types.Navigator) private navigator: Navigator;
   @inject(Types.NewsStorage) private NewsStorage: NewsStorage;
   @inject(Types.BestPlayersStorage) private BestPlayersStorage: BestPlayersStorage;
+  @inject(Types.GameStorage) private GameStorage: GameStorage;
 
 
 
@@ -20,6 +22,7 @@ export class InitializationService {
       this.initializationStorage.setProgress(0);
       await this.NewsStorage.getDataNews();
       await this.BestPlayersStorage.getDataBestPlayers();
+      await this.GameStorage.getDataGame();
 
       this.initializationStorage.setProgress(100);
       this.initializationStorage.setInitializationSuccessful(true);

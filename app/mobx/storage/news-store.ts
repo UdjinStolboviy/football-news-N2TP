@@ -14,8 +14,6 @@ export class NewsStorage {
 
     @observable private allNews: News[];
 
-
-
     constructor() {
         this.allNews = [];
 

@@ -10,4 +10,5 @@ export class Colors {
   public static readonly C343443: string = '#343434';
   public static readonly C474747: string = '#474747';
   public static readonly C9A9A9A: string = '#9A9A9A';
+  public static readonly ECC22F: string = '#ECC22F';
 };

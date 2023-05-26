@@ -1,3 +1,4 @@
+import { GameStorage } from './../mobx/storage/game-store';
 import { BestPlayers } from './../mobx/dto/best-players';
 export const Types = {
   Navigator: Symbol.for('Navigator'),
@@ -10,4 +11,5 @@ export const Types = {
   PeopleStorage: Symbol.for('PeopleStorage'),
   NewsStorage: Symbol.for('NewsStorage'),
   BestPlayersStorage: Symbol.for('BestPlayersStorage'),
+  GameStorage: Symbol.for('GameStorage'),
 };
