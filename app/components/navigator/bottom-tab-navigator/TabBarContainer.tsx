@@ -10,7 +10,6 @@ import {Navigator} from '../../../service/navigator/navigator';
 import {NavigatorConstants} from '../../../utils/navigator-constants';
 
 import {useNavigation} from '@react-navigation/native';
-import {PeopleStorage} from '../../../mobx/storage/sw-people-store';
 import {ButtonText} from '../../common/button/ButtonText';
 import {ButtonNawTab} from '../../common/button/ButtonNawTab';
 
@@ -22,7 +21,6 @@ export const TabBarContainer = observer((props: TabBarContainerProps) => {
   const navigator: Navigator = useInjection(Types.Navigator);
   const [activeNumber, setActiveNumber] = React.useState(0);
   const navigation = useNavigation();
-  const peopleStorege: PeopleStorage = useInjection(Types.PeopleStorage);
 
   const routeName = navigator.getNavigator()?.getCurrentRoute()?.name;
 

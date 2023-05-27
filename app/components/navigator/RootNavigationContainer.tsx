@@ -10,7 +10,6 @@ import {RootStackParamList} from './types';
 import {InitialNavigator} from './InitialNavigator';
 import {ErrorNavigator} from './ErrorNavigator';
 import {BottomTabNavigator} from './bottom-tab-navigator/BottomTabNavigator';
-import {PeopleScreen} from '../screens/peopleScreen';
 import {NewsScreen} from '../screens/main/NewsScreen';
 import {MatchScreen} from '../screens/main/MatchScreen';
 

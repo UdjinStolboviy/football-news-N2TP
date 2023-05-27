@@ -2,7 +2,7 @@
 import { NavigatorConstants } from '../../utils/navigator-constants';
 import { MatchScreenParams } from '../screens/main/MatchScreen';
 import { NewsScreenParams } from '../screens/main/NewsScreen';
-import { PeopleScreenParams } from '../screens/peopleScreen';
+
 
 
 export type RootStackParamList = {
@@ -16,7 +16,5 @@ export type RootStackParamList = {
   [NavigatorConstants.FAVORITE_SCREEN]: undefined;
   [NavigatorConstants.MATCH_SCREEN]: MatchScreenParams;
   [NavigatorConstants.ERROR_SCREEN]: undefined;
-  [NavigatorConstants.TEST1_SCREEN]: undefined;
-  [NavigatorConstants.TEST2_SCREEN]: undefined;
-  [NavigatorConstants.TEST3_SCREEN]: undefined;
+
 };

@@ -1,5 +1,6 @@
 import {
   FlatList,
+  Image,
   ImageBackground,
   Platform,
   SafeAreaView,
@@ -94,7 +95,28 @@ export const MatchScreen = observer(
             style={styles.button}>
             {checkFavorite()}
           </TouchableOpacity>
-          <Text style={styles.textStan}>Team Composition</Text>
+          <View style={styles.teamCompositionWrapper}>
+            <Text style={styles.textStan}>Team Composition</Text>
+            <View style={styles.imgTeamWrapper}>
+              <Image
+                source={{uri: game.getTeamsHomeLogo()}}
+                style={styles.imgLogo}
+              />
+              <Image
+                source={{uri: game.getTeamsAwayLogo()}}
+                style={styles.imgLogo}
+              />
+            </View>
+          </View>
+          <View style={styles.textWrapper}>
+            <Text style={styles.titleText}>Coach</Text>
+          </View>
+          <View style={styles.textWrapper}>
+            <Text style={styles.titleText}>Starting XI</Text>
+          </View>
+          <View style={styles.textWrapper}>
+            <Text style={styles.titleText}>Substitutes</Text>
+          </View>
         </View>
       </SafeAreaView>
     );
@@ -111,6 +133,28 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  titleText: {
+    fontSize: 14,
+    lineHeight: 16,
+    color: Colors.FFFFFF,
+    fontWeight: '600',
+  },
+  imgLogo: {
+    width: 61,
+    height: 61,
+  },
+  imgTeamWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    width: '100%',
+  },
+  teamCompositionWrapper: {
+    marginTop: 10,
+    width: '100%',
+    height: 110,
+    backgroundColor: Colors.C232323,
   },
   wrappersIcon: {
     flexDirection: 'row',
