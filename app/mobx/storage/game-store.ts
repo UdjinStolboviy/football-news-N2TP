@@ -4,6 +4,7 @@ import { Types } from '../../ioc/types';
 import { ApiService } from '../../service/api/api';
 import { News } from '../dto/news';
 import { Game } from '../dto/game';
+import { Player } from '../dto/player';
 
 
 const _ = require('lodash');
@@ -15,9 +16,9 @@ export class GameStorage {
 
     @observable private allGame: Game[];
 
+
     constructor() {
         this.allGame = [];
-
     }
 
     @action
@@ -45,8 +46,6 @@ export class GameStorage {
                 }
                 this.allGame.push(new Game(fixtureData));
             });
-            console.log('dataGame', dataGame);
-
         } catch (e) {
             console.error('getDataGames error', e);
         }
