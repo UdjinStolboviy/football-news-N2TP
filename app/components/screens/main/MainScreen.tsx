@@ -7,6 +7,7 @@ import {
   StatusBar,
   ActivityIndicator,
   AppState,
+  Platform,
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {Colors} from '../../../utils/colors';
@@ -95,7 +96,8 @@ export const MainScreen = observer(() => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.C4E4E4E,
+    backgroundColor: Colors.OFOFOFO,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
 
   bigText: {
@@ -112,7 +114,6 @@ const styles = StyleSheet.create({
   },
 
   wrapperNews: {
-    marginTop: 10,
     height: '50%',
     width: '100%',
   },

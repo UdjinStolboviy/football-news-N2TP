@@ -27,17 +27,20 @@ export const BestPlayerCardView = ({
   const rating = Number(bestPlayer.getRating()) * 10;
 
   return (
-    <View style={[styles.container]}>
-      <View style={styles.mainWrapper}>
-        <Text
-          numberOfLines={1}
-          style={[
-            styles.textTitle,
-          ]}>{`${firstName} ${lastName}, ${nationality}`}</Text>
-        <Text style={[styles.textPosit]}>{bestPlayer.getPosition()}</Text>
+    <>
+      <View style={[styles.container]}>
+        <View style={styles.mainWrapper}>
+          <Text
+            numberOfLines={1}
+            style={[
+              styles.textTitle,
+            ]}>{`${firstName} ${lastName}, ${nationality}`}</Text>
+          <Text style={[styles.textPosit]}>{bestPlayer.getPosition()}</Text>
+        </View>
+        <Text style={[styles.textTitle]}>{rating.toFixed(1)}</Text>
       </View>
-      <Text style={[styles.textTitle]}>{rating.toFixed(1)}</Text>
-    </View>
+      <View style={{height: 5, backgroundColor: Colors.C343443}} />
+    </>
   );
 };
 
@@ -46,7 +49,6 @@ const styles = StyleSheet.create({
     height: 48,
     flexDirection: 'row',
     padding: 14,
-    marginBottom: 6,
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: Colors.ACACACA,

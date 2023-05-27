@@ -54,7 +54,10 @@ export const NewsScreen = ({
   return (
     <SafeAreaView style={styles.container}>
       <View
-        style={[styles.container, {marginTop: Platform.OS === 'ios' ? 0 : 20}]}>
+        style={[
+          styles.container,
+          {marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0},
+        ]}>
         <StatusBar
           translucent
           backgroundColor="transparent"

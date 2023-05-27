@@ -52,6 +52,11 @@ export class GameStorage {
         }
     }
 
+    @action
+    getFavoriteGames(): Game[] {
+        return this.allGame.filter((item: Game) => item.getFavorite());
+    }
+
 
 
     @action

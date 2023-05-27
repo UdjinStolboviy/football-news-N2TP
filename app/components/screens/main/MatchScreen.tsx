@@ -1,6 +1,7 @@
 import {
   FlatList,
   ImageBackground,
+  Platform,
   SafeAreaView,
   StatusBar,
   StyleSheet,
@@ -78,21 +79,23 @@ export const MatchScreen = observer(
               styles.textTime,
             ]}>{`${day}.${month}.${year}    ${time}`}</Text>
         </View>
-        <ImageBackground
-          style={styles.imageBack}
-          source={require('../../../../assets/img/imgback.png')}>
-          <Text
-            style={[
-              styles.bigText,
-            ]}>{`${game.getTeamsHomeGoals()} : ${game.getTeamsAwayGoals()}`}</Text>
-        </ImageBackground>
-        <Text style={styles.textStan}>FINISHED</Text>
-        <TouchableOpacity
-          onPress={() => game.setFavorite(!favorite)}
-          style={styles.button}>
-          {checkFavorite()}
-        </TouchableOpacity>
-        <Text style={styles.textStan}>Team Composition</Text>
+        <View style={styles.mainInfoWrapper}>
+          <ImageBackground
+            style={styles.imageBack}
+            source={require('../../../../assets/img/imgback.png')}>
+            <Text
+              style={[
+                styles.bigText,
+              ]}>{`${game.getTeamsHomeGoals()} : ${game.getTeamsAwayGoals()}`}</Text>
+          </ImageBackground>
+          <Text style={styles.textStan}>FINISHED</Text>
+          <TouchableOpacity
+            onPress={() => game.setFavorite(!favorite)}
+            style={styles.button}>
+            {checkFavorite()}
+          </TouchableOpacity>
+          <Text style={styles.textStan}>Team Composition</Text>
+        </View>
       </SafeAreaView>
     );
   },
@@ -101,7 +104,8 @@ export const MatchScreen = observer(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.C4E4E4E,
+    backgroundColor: Colors.OFOFOFO,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   button: {
     paddingTop: 10,
@@ -112,6 +116,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    marginLeft: -27,
+  },
+  mainInfoWrapper: {
+    height: '100%',
+    backgroundColor: Colors.C343443,
   },
   imageBack: {
     justifyContent: 'center',
@@ -150,7 +159,6 @@ const styles = StyleSheet.create({
   textWrapper: {
     width: '100%',
     padding: 5,
-    marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingLeft: 10,
@@ -161,10 +169,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
     color: Colors.FFFFFF,
-  },
-  wrapperBestPlayer: {
-    marginTop: 10,
-    height: '100%',
-    width: '100%',
   },
 });

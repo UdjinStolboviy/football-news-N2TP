@@ -24,8 +24,17 @@ export const NewsCardView = ({news, index}: NewsCardViewProps) => {
   const year = news.getPublishedAt().slice(0, 4);
   const month = news.getPublishedAt().slice(5, 7);
   const day = news.getPublishedAt().slice(8, 10);
-  const webUrl = news.getUrl().slice(12, 20);
+  const extractDomain = (url: string) => {
+    const domainRegex = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n]+)/im;
+    const matches = url.match(domainRegex);
+    if (matches && matches.length > 1) {
+      return matches[1];
+    }
+    return '';
+  };
+  const webUrl = extractDomain(news.getUrl());
   const colorBack = index % 2 !== 0 ? Colors.C9A9A9A : Colors.ACACACA;
+
   return (
     <View style={[styles.container, {backgroundColor: colorBack}]}>
       <Image
@@ -52,7 +61,7 @@ export const NewsCardView = ({news, index}: NewsCardViewProps) => {
             flexDirection: 'row',
             justifyContent: 'flex-end',
             marginRight: -5,
-            marginTop: 3,
+            marginTop: 5,
           }}>
           <TouchableOpacity
             onPress={() =>

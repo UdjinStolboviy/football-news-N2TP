@@ -15,12 +15,15 @@ import {NavigatorConstants} from '../../utils/navigator-constants';
 import {Colors} from '../../utils/colors';
 import {Game} from '../../mobx/dto/game';
 
-export interface GameCardViewProps {
+export interface FavoritesGameCardViewProps {
   game: Game;
   index: number;
 }
 
-export const GameCardView = ({game, index}: GameCardViewProps) => {
+export const FavoritesGameCardView = ({
+  game,
+  index,
+}: FavoritesGameCardViewProps) => {
   const navigation = useNavigation();
   const year = game.getDate().slice(0, 4);
   const month = game.getDate().slice(5, 7);
@@ -47,33 +50,48 @@ export const GameCardView = ({game, index}: GameCardViewProps) => {
         </View>
 
         <View style={styles.mainInfoWrapper}>
-          <Image
-            style={{width: 24, height: 24}}
-            source={{uri: game.getTeamsHomeLogo()}}
-            loadingIndicatorSource={{uri: game.getTeamsHomeLogo()}}
-          />
-          <Text style={[styles.textPlyer]}>{`${game.getTeamsHomeName()}`}</Text>
+          <View style={styles.wrapperInfo}>
+            <Image
+              style={{width: 24, height: 24}}
+              source={{uri: game.getTeamsHomeLogo()}}
+              loadingIndicatorSource={{uri: game.getTeamsHomeLogo()}}
+            />
+            <Text
+              style={[styles.textPlyer]}>{`${game.getTeamsHomeName()}`}</Text>
+          </View>
+          <Text
+            style={[styles.textPlyer]}>{`${game.getTeamsHomeGoals()}`}</Text>
         </View>
         <View style={{height: 1}} />
         <View style={styles.mainInfoWrapper}>
-          <Image
-            style={{width: 24, height: 24}}
-            source={{uri: game.getTeamsAwayLogo()}}
-            loadingIndicatorSource={{uri: game.getTeamsAwayLogo()}}
-          />
-          <Text style={[styles.textPlyer]}>{`${game.getTeamsAwayName()}`}</Text>
+          <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={() =>
+              // @ts-ignore
+              navigation.navigate(NavigatorConstants.MATCH_SCREEN, {
+                game: game,
+              })
+            }>
+            <View style={styles.wrapperInfo}>
+              <Image
+                style={{width: 24, height: 24}}
+                source={{uri: game.getTeamsAwayLogo()}}
+                loadingIndicatorSource={{uri: game.getTeamsAwayLogo()}}
+              />
+              <Text
+                style={[styles.textPlyer]}>{`${game.getTeamsAwayName()}`}</Text>
+            </View>
+          </TouchableOpacity>
+
+          <Text
+            style={[styles.textPlyer]}>{`${game.getTeamsAwayGoals()}`}</Text>
         </View>
       </View>
       <TouchableOpacity
         activeOpacity={0.9}
-        onPress={() =>
-          // @ts-ignore
-          navigation.navigate(NavigatorConstants.MATCH_SCREEN, {
-            game: game,
-          })
-        }
+        onPress={() => game.setFavorite(false)}
         style={styles.button}>
-        <Text style={styles.textButton}>Match Info</Text>
+        <Text style={styles.textButton}>Delete</Text>
       </TouchableOpacity>
     </View>
   );
@@ -82,18 +100,25 @@ export const GameCardView = ({game, index}: GameCardViewProps) => {
 const styles = StyleSheet.create({
   container: {
     height: 88,
+    marginBottom: 39,
     width: '100%',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    marginBottom: 4,
+  },
+  wrapperInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
   mainInfoWrapper: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     height: 36,
     width: '100%',
     paddingLeft: 12,
+    paddingRight: 10,
     backgroundColor: Colors.ACACACA,
-    alignItems: 'center',
   },
   textTime: {
     fontSize: 14,
@@ -109,18 +134,16 @@ const styles = StyleSheet.create({
   button: {
     position: 'absolute',
     right: 0,
-    width: 29,
-    height: 92,
-    paddingTop: 20,
-    backgroundColor: Colors.C343443,
+    zIndex: 1,
+    bottom: -23,
+    width: 118,
+    height: 20,
+    backgroundColor: Colors.C4E4E4E,
     justifyContent: 'center',
     alignItems: 'center',
   },
   textButton: {
-    width: 90,
-
     fontSize: 14,
-    transform: [{rotate: '90deg'}],
     fontWeight: '400',
     color: Colors.FFFFFF,
   },

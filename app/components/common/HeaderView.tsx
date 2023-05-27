@@ -20,6 +20,10 @@ export const HeaderView = (props: HeaderViewProps) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    backgroundColor: Colors.C4E4E4E,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   text: {
     textAlign: 'center',
