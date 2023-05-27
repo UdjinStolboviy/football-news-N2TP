@@ -1,9 +1,18 @@
 import { inject, injectable } from 'inversify';
 import { makeObservable } from 'mobx';
-import axios, { AxiosResponse } from "axios";
+
 import { Environment } from '../../config/Environment';
 import Config from 'react-native-config';
 
+const myHeaders = new Headers();
+myHeaders.append("X-RapidAPI-Host", Config.X_RAPIDAPI_API_URL);
+myHeaders.append("X-RapidAPI-Key", Config.X_RAPIDAPI_KEY);
+
+const requestOptions = {
+    method: 'GET',
+    headers: myHeaders,
+    redirect: 'follow'
+};
 
 @injectable()
 export class ApiService {
@@ -27,31 +36,22 @@ export class ApiService {
     }
 
     public async getBestPlayer(): Promise<any> {
-        const myHeaders = new Headers();
-        myHeaders.append("X-RapidAPI-Host", "api-football-v1.p.rapidapi.com");
-        myHeaders.append("X-RapidAPI-Key", "38e4bc24fbmshd4e9a9bd4ca6714p115d6fjsn271619dce665");
 
-        const requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };
         const response = await fetch('https://api-football-v1.p.rapidapi.com/v3/' + 'players/topscorers?season=2018&league=61', requestOptions);
         const jsonData = await response.json();
         return jsonData
     }
 
     public async getGames(): Promise<any> {
-        const myHeaders = new Headers();
-        myHeaders.append("X-RapidAPI-Host", "api-football-v1.p.rapidapi.com");
-        myHeaders.append("X-RapidAPI-Key", "38e4bc24fbmshd4e9a9bd4ca6714p115d6fjsn271619dce665");
 
-        const requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };
         const response = await fetch('https://api-football-v1.p.rapidapi.com/v3/' + 'fixtures?season=2022&league=61', requestOptions);
+        const jsonData = await response.json();
+        return jsonData
+    }
+
+    public async getTeams(id: string): Promise<any> {
+
+        const response = await fetch('https://api-football-v1.p.rapidapi.com/v3/' + 'fixtures/lineups?fixture=' + `${id}`, requestOptions);
         const jsonData = await response.json();
         return jsonData
     }
