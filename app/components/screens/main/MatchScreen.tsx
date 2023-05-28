@@ -29,6 +29,7 @@ import {IconAddFavorites} from '../../common/icon/IconAddFavorites';
 import {IconSterFavorites} from '../../common/icon/IconStreFavor';
 import {LineupsStorage} from '../../../mobx/storage/lineups-store';
 import {Player} from '../../../mobx/dto/player';
+import {UIActivityIndicator} from 'react-native-indicators';
 
 export interface MatchScreenParams {
   game: Game;
@@ -112,57 +113,29 @@ export const MatchScreen = observer(
               />
             </View>
           </View>
-          <ScrollView>
-            <View style={styles.textWrapper}>
-              <Text style={styles.titleText}>Coach</Text>
-            </View>
-            <View style={styles.infoWrapper}>
-              <View style={styles.teamHome}>
-                <Text style={styles.textTeam}>
-                  {lineupsStorage.getCouchHome()}
-                </Text>
+          {lineupsStorage.getSubstitutesAway().length ? (
+            <ScrollView>
+              <View style={styles.textWrapper}>
+                <Text style={styles.titleText}>Coach</Text>
               </View>
-              <View style={styles.teamAway}>
-                <Text style={styles.textTeam}>
-                  {lineupsStorage.getCouchAway()}
-                </Text>
+              <View style={styles.infoWrapper}>
+                <View style={styles.teamHome}>
+                  <Text style={styles.textTeam}>
+                    {lineupsStorage.getCouchHome()}
+                  </Text>
+                </View>
+                <View style={styles.teamAway}>
+                  <Text style={styles.textTeam}>
+                    {lineupsStorage.getCouchAway()}
+                  </Text>
+                </View>
               </View>
-            </View>
-            <View style={styles.textWrapper}>
-              <Text style={styles.titleText}>Starting XI</Text>
-            </View>
-            <View style={styles.infoWrapper}>
-              <View style={{width: '50%'}}>
-                {lineupsStorage.getTeamHome().map((item: Player, index) => {
-                  return (
-                    <View key={index} style={styles.teamHome}>
-                      <Text style={styles.textTeam}>
-                        {`${item.getNumberPlayer()}  ${item.getName()}`}
-                      </Text>
-                    </View>
-                  );
-                })}
+              <View style={styles.textWrapper}>
+                <Text style={styles.titleText}>Starting XI</Text>
               </View>
-              <View style={{width: '50%', alignItems: 'flex-end'}}>
-                {lineupsStorage.getTeamAway().map((item: Player, index) => {
-                  return (
-                    <View key={index} style={styles.teamAway}>
-                      <Text style={styles.textTeam}>
-                        {`${item.getName()}  ${item.getNumberPlayer()}`}
-                      </Text>
-                    </View>
-                  );
-                })}
-              </View>
-            </View>
-            <View style={styles.textWrapper}>
-              <Text style={styles.titleText}>Substitutes</Text>
-            </View>
-            <View style={styles.infoWrapper}>
-              <View style={{width: '50%'}}>
-                {lineupsStorage
-                  .getSubstitutesHome()
-                  .map((item: Player, index) => {
+              <View style={styles.infoWrapper}>
+                <View style={{width: '50%'}}>
+                  {lineupsStorage.getTeamHome().map((item: Player, index) => {
                     return (
                       <View key={index} style={styles.teamHome}>
                         <Text style={styles.textTeam}>
@@ -171,11 +144,9 @@ export const MatchScreen = observer(
                       </View>
                     );
                   })}
-              </View>
-              <View style={{width: '50%', alignItems: 'flex-end'}}>
-                {lineupsStorage
-                  .getSubstitutesAway()
-                  .map((item: Player, index) => {
+                </View>
+                <View style={{width: '50%', alignItems: 'flex-end'}}>
+                  {lineupsStorage.getTeamAway().map((item: Player, index) => {
                     return (
                       <View key={index} style={styles.teamAway}>
                         <Text style={styles.textTeam}>
@@ -184,10 +155,46 @@ export const MatchScreen = observer(
                       </View>
                     );
                   })}
+                </View>
               </View>
+              <View style={styles.textWrapper}>
+                <Text style={styles.titleText}>Substitutes</Text>
+              </View>
+              <View style={styles.infoWrapper}>
+                <View style={{width: '50%'}}>
+                  {lineupsStorage
+                    .getSubstitutesHome()
+                    .map((item: Player, index) => {
+                      return (
+                        <View key={index} style={styles.teamHome}>
+                          <Text style={styles.textTeam}>
+                            {`${item.getNumberPlayer()}  ${item.getName()}`}
+                          </Text>
+                        </View>
+                      );
+                    })}
+                </View>
+                <View style={{width: '50%', alignItems: 'flex-end'}}>
+                  {lineupsStorage
+                    .getSubstitutesAway()
+                    .map((item: Player, index) => {
+                      return (
+                        <View key={index} style={styles.teamAway}>
+                          <Text style={styles.textTeam}>
+                            {`${item.getName()}  ${item.getNumberPlayer()}`}
+                          </Text>
+                        </View>
+                      );
+                    })}
+                </View>
+              </View>
+              <View style={{height: 70}} />
+            </ScrollView>
+          ) : (
+            <View style={styles.loaderContainer}>
+              <UIActivityIndicator color="white" />
             </View>
-            <View style={{height: 70}} />
-          </ScrollView>
+          )}
         </View>
       </SafeAreaView>
     );
@@ -199,6 +206,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.OFOFOFO,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textTeam: {
     fontSize: 14,

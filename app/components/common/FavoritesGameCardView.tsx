@@ -14,6 +14,9 @@ import {NavigatorConstants} from '../../utils/navigator-constants';
 
 import {Colors} from '../../utils/colors';
 import {Game} from '../../mobx/dto/game';
+import {LineupsStorage} from '../../mobx/storage/lineups-store';
+import {useInjection} from 'inversify-react';
+import {Types} from '../../ioc/types';
 
 export interface FavoritesGameCardViewProps {
   game: Game;
@@ -29,6 +32,7 @@ export const FavoritesGameCardView = ({
   const month = game.getDate().slice(5, 7);
   const day = game.getDate().slice(8, 10);
   const time = game.getDate().slice(11, 16);
+  const lineupsStorage: LineupsStorage = useInjection(Types.LineupsStorage);
 
   return (
     <View style={[styles.container]}>
@@ -66,12 +70,14 @@ export const FavoritesGameCardView = ({
         <View style={styles.mainInfoWrapper}>
           <TouchableOpacity
             activeOpacity={0.9}
-            onPress={() =>
+            onPress={() => {
+              lineupsStorage.clearData();
+              lineupsStorage.getLineupsTeams(game.getId());
               // @ts-ignore
               navigation.navigate(NavigatorConstants.MATCH_SCREEN, {
                 game: game,
-              })
-            }>
+              });
+            }}>
             <View style={styles.wrapperInfo}>
               <Image
                 style={{width: 24, height: 24}}
