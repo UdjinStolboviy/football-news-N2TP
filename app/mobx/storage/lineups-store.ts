@@ -1,5 +1,5 @@
 import { inject, injectable } from 'inversify';
-import { action, makeObservable, observable } from 'mobx';
+import { action, makeObservable, observable, observe } from 'mobx';
 import { Types } from '../../ioc/types';
 import { ApiService } from '../../service/api/api';
 import { News } from '../dto/news';
@@ -11,7 +11,7 @@ const _ = require('lodash');
 
 
 @injectable()
-export class GameStorage {
+export class LineupsStorage {
     @inject(Types.ApiService) private ApiService: ApiService;
 
     private couchHome: string;
@@ -19,9 +19,10 @@ export class GameStorage {
     private teamHome: Player[];
     private teamAway: Player[];
     private substitutesHome: Player[];
-    private substitutesAway: Player[];
+    @observable private substitutesAway: Player[];
 
     constructor() {
+        makeObservable(this);
         this.couchHome = '';
         this.couchAway = '';
         this.teamHome = [];
@@ -50,53 +51,74 @@ export class GameStorage {
         return this.teamAway;
     }
 
-    public async getTeams(id: string) {
+    @action
+    public getSubstitutesHome(): Player[] {
+        return this.substitutesHome;
+    }
+
+    @action
+    public getSubstitutesAway(): Player[] {
+
+        return this.substitutesAway;
+    }
+
+    public async getLineupsTeams(id: number) {
         try {
             const dataGame = await this.ApiService.getTeams(id);
-            dataGame.response.forEach((item: any) => {
-                this.couchHome = item.coaches.home.name;
-                this.couchAway = item.coaches.away.name;
-                item.lineups.home.startXI.forEach((item: any) => {
-                    const playerData = {
-                        firstName: item.player.name.first,
-                        lastName: item.player.name.last,
-                        numberPlayer: item.player.number,
-                    }
-                    this.teamHome.push(new Player(playerData));
-                });
-                item.lineups.away.startXI.forEach((item: any) => {
-                    const playerData = {
-                        firstName: item.player.name.first,
-                        lastName: item.player.name.last,
-                        numberPlayer: item.player.number,
-                    }
-                    this.teamAway.push(new Player(playerData));
-                });
-                item.lineups.home.substitutes.forEach((item: any) => {
-                    const playerData = {
-                        firstName: item.player.name.first,
-                        lastName: item.player.name.last,
-                        numberPlayer: item.player.number,
-                    }
-                    this.substitutesHome.push(new Player(playerData));
+
+            this.couchHome = dataGame.response[0].coach.name;
+            this.couchAway = dataGame.response[1].coach.name;
+            dataGame.response[0].startXI.forEach((item: any) => {
+                const playerData = {
+                    name: item.player.name,
+                    numberPlayer: item.player.number,
                 }
-                );
-                item.lineups.away.substitutes.forEach((item: any) => {
-                    const playerData = {
-                        firstName: item.player.name.first,
-                        lastName: item.player.name.last,
-                        numberPlayer: item.player.number,
-                    }
-                    this.substitutesAway.push(new Player(playerData));
+                this.teamHome.push(new Player(playerData));
+            }
+            );
+            dataGame.response[1].startXI.forEach((item: any) => {
+                const playerData = {
+                    name: item.player.name,
+                    numberPlayer: item.player.number,
                 }
-                );
-            });
+                this.teamAway.push(new Player(playerData));
+            }
+            );
+
+            dataGame.response[0].substitutes.forEach((item: any) => {
+                const playerData = {
+                    name: item.player.name,
+                    numberPlayer: item.player.number,
+                }
+                this.substitutesHome.push(new Player(playerData));
+            }
+            );
+            dataGame.response[1].substitutes.forEach((item: any) => {
+                const playerData = {
+                    name: item.player.name,
+                    numberPlayer: item.player.number,
+                }
+                this.substitutesAway.push(new Player(playerData));
+            }
+            );
+
             console.log('getTeams', dataGame);
 
         } catch (e) {
             console.error('getTeams error', e);
         }
     }
+
+    @action
+    public clearData() {
+        this.couchHome = '';
+        this.couchAway = '';
+        this.teamHome = [];
+        this.teamAway = [];
+        this.substitutesHome = [];
+        this.substitutesAway = [];
+    }
+
 
 
 

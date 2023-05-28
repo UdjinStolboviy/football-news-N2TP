@@ -49,7 +49,7 @@ export class ApiService {
         return jsonData
     }
 
-    public async getTeams(id: string): Promise<any> {
+    public async getTeams(id: number): Promise<any> {
 
         const response = await fetch('https://api-football-v1.p.rapidapi.com/v3/' + 'fixtures/lineups?fixture=' + `${id}`, requestOptions);
         const jsonData = await response.json();

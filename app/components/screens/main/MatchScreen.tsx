@@ -4,13 +4,14 @@ import {
   ImageBackground,
   Platform,
   SafeAreaView,
+  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Colors} from '../../../utils/colors';
 import {useNavigation} from '@react-navigation/native';
 import {InitializationService} from '../../../service/initializer/initialization-service';
@@ -26,6 +27,8 @@ import {observer} from 'mobx-react';
 import {IconFavorites} from '../../common/icon/IconFavorites';
 import {IconAddFavorites} from '../../common/icon/IconAddFavorites';
 import {IconSterFavorites} from '../../common/icon/IconStreFavor';
+import {LineupsStorage} from '../../../mobx/storage/lineups-store';
+import {Player} from '../../../mobx/dto/player';
 
 export interface MatchScreenParams {
   game: Game;
@@ -42,6 +45,7 @@ export const MatchScreen = observer(
     const month = game.getDate().slice(5, 7);
     const day = game.getDate().slice(8, 10);
     const time = game.getDate().slice(11, 16);
+    const lineupsStorage: LineupsStorage = useInjection(Types.LineupsStorage);
 
     const checkFavorite = () => {
       if (favorite) {
@@ -108,15 +112,82 @@ export const MatchScreen = observer(
               />
             </View>
           </View>
-          <View style={styles.textWrapper}>
-            <Text style={styles.titleText}>Coach</Text>
-          </View>
-          <View style={styles.textWrapper}>
-            <Text style={styles.titleText}>Starting XI</Text>
-          </View>
-          <View style={styles.textWrapper}>
-            <Text style={styles.titleText}>Substitutes</Text>
-          </View>
+          <ScrollView>
+            <View style={styles.textWrapper}>
+              <Text style={styles.titleText}>Coach</Text>
+            </View>
+            <View style={styles.infoWrapper}>
+              <View style={styles.teamHome}>
+                <Text style={styles.textTeam}>
+                  {lineupsStorage.getCouchHome()}
+                </Text>
+              </View>
+              <View style={styles.teamAway}>
+                <Text style={styles.textTeam}>
+                  {lineupsStorage.getCouchAway()}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.textWrapper}>
+              <Text style={styles.titleText}>Starting XI</Text>
+            </View>
+            <View style={styles.infoWrapper}>
+              <View style={{width: '50%'}}>
+                {lineupsStorage.getTeamHome().map((item: Player, index) => {
+                  return (
+                    <View key={index} style={styles.teamHome}>
+                      <Text style={styles.textTeam}>
+                        {`${item.getNumberPlayer()}  ${item.getName()}`}
+                      </Text>
+                    </View>
+                  );
+                })}
+              </View>
+              <View style={{width: '50%', alignItems: 'flex-end'}}>
+                {lineupsStorage.getTeamAway().map((item: Player, index) => {
+                  return (
+                    <View key={index} style={styles.teamAway}>
+                      <Text style={styles.textTeam}>
+                        {`${item.getName()}  ${item.getNumberPlayer()}`}
+                      </Text>
+                    </View>
+                  );
+                })}
+              </View>
+            </View>
+            <View style={styles.textWrapper}>
+              <Text style={styles.titleText}>Substitutes</Text>
+            </View>
+            <View style={styles.infoWrapper}>
+              <View style={{width: '50%'}}>
+                {lineupsStorage
+                  .getSubstitutesHome()
+                  .map((item: Player, index) => {
+                    return (
+                      <View key={index} style={styles.teamHome}>
+                        <Text style={styles.textTeam}>
+                          {`${item.getNumberPlayer()}  ${item.getName()}`}
+                        </Text>
+                      </View>
+                    );
+                  })}
+              </View>
+              <View style={{width: '50%', alignItems: 'flex-end'}}>
+                {lineupsStorage
+                  .getSubstitutesAway()
+                  .map((item: Player, index) => {
+                    return (
+                      <View key={index} style={styles.teamAway}>
+                        <Text style={styles.textTeam}>
+                          {`${item.getName()}  ${item.getNumberPlayer()}`}
+                        </Text>
+                      </View>
+                    );
+                  })}
+              </View>
+            </View>
+            <View style={{height: 70}} />
+          </ScrollView>
         </View>
       </SafeAreaView>
     );
@@ -128,6 +199,30 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.OFOFOFO,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  textTeam: {
+    fontSize: 14,
+    lineHeight: 16,
+    color: Colors.OFOFOFO,
+    fontWeight: '400',
+  },
+  teamHome: {
+    width: '50%',
+    height: 25,
+    justifyContent: 'center',
+    paddingLeft: 10,
+  },
+  teamAway: {
+    width: '50%',
+    height: 25,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingRight: 10,
+  },
+  infoWrapper: {
+    width: '100%',
+    flexDirection: 'row',
+    backgroundColor: Colors.ACACACA,
   },
   button: {
     paddingTop: 10,

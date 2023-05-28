@@ -12,4 +12,5 @@ export const Types = {
   NewsStorage: Symbol.for('NewsStorage'),
   BestPlayersStorage: Symbol.for('BestPlayersStorage'),
   GameStorage: Symbol.for('GameStorage'),
+  LineupsStorage: Symbol.for('LineupsStorage'),
 };

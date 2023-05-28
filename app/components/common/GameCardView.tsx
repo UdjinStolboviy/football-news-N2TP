@@ -14,6 +14,9 @@ import {NavigatorConstants} from '../../utils/navigator-constants';
 
 import {Colors} from '../../utils/colors';
 import {Game} from '../../mobx/dto/game';
+import {useInjection} from 'inversify-react';
+import {LineupsStorage} from '../../mobx/storage/lineups-store';
+import {Types} from '../../ioc/types';
 
 export interface GameCardViewProps {
   game: Game;
@@ -26,6 +29,7 @@ export const GameCardView = ({game, index}: GameCardViewProps) => {
   const month = game.getDate().slice(5, 7);
   const day = game.getDate().slice(8, 10);
   const time = game.getDate().slice(11, 16);
+  const lineupsStorage: LineupsStorage = useInjection(Types.LineupsStorage);
 
   return (
     <View style={[styles.container]}>
@@ -66,12 +70,14 @@ export const GameCardView = ({game, index}: GameCardViewProps) => {
       </View>
       <TouchableOpacity
         activeOpacity={0.9}
-        onPress={() =>
+        onPress={() => {
+          lineupsStorage.clearData();
+          lineupsStorage.getLineupsTeams(game.getId());
           // @ts-ignore
           navigation.navigate(NavigatorConstants.MATCH_SCREEN, {
             game: game,
-          })
-        }
+          });
+        }}
         style={styles.button}>
         <Text style={styles.textButton}>Match Info</Text>
       </TouchableOpacity>
