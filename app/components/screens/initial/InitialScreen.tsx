@@ -42,7 +42,7 @@ export const InitialScreen = observer(() => {
       if (initializationSuccessful) {
         setTimeout(() => {
           navigation.navigate(NavigatorConstants.BOTTOM_TAB_STACK as never);
-        }, 5000);
+        }, 2000);
       } else {
         navigation.navigate(NavigatorConstants.ERROR_STACK as never);
       }
