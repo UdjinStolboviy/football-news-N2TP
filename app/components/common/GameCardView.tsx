@@ -32,7 +32,17 @@ export const GameCardView = ({game, index}: GameCardViewProps) => {
   const lineupsStorage: LineupsStorage = useInjection(Types.LineupsStorage);
 
   return (
-    <View style={[styles.container]}>
+    <TouchableOpacity
+      style={[styles.container]}
+      activeOpacity={0.9}
+      onPress={() => {
+        lineupsStorage.clearData();
+        lineupsStorage.getLineupsTeams(game.getId());
+        // @ts-ignore
+        navigation.navigate(NavigatorConstants.MATCH_SCREEN, {
+          game: game,
+        });
+      }}>
       <View style={{width: '100%'}}>
         <View
           style={{
@@ -68,20 +78,10 @@ export const GameCardView = ({game, index}: GameCardViewProps) => {
           <Text style={[styles.textPlyer]}>{`${game.getTeamsAwayName()}`}</Text>
         </View>
       </View>
-      <TouchableOpacity
-        activeOpacity={0.9}
-        onPress={() => {
-          lineupsStorage.clearData();
-          lineupsStorage.getLineupsTeams(game.getId());
-          // @ts-ignore
-          navigation.navigate(NavigatorConstants.MATCH_SCREEN, {
-            game: game,
-          });
-        }}
-        style={styles.button}>
+      <View style={styles.button}>
         <Text style={styles.textButton}>Match Info</Text>
-      </TouchableOpacity>
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 

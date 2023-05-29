@@ -36,7 +36,17 @@ export const FavoritesGameCardView = ({
 
   return (
     <View style={[styles.container]}>
-      <View style={{width: '100%'}}>
+      <TouchableOpacity
+        style={{width: '100%'}}
+        activeOpacity={0.9}
+        onPress={() => {
+          lineupsStorage.clearData();
+          lineupsStorage.getLineupsTeams(game.getId());
+          // @ts-ignore
+          navigation.navigate(NavigatorConstants.MATCH_SCREEN, {
+            game: game,
+          });
+        }}>
         <View
           style={{
             flexDirection: 'row',
@@ -68,16 +78,7 @@ export const FavoritesGameCardView = ({
         </View>
         <View style={{height: 1}} />
         <View style={styles.mainInfoWrapper}>
-          <TouchableOpacity
-            activeOpacity={0.9}
-            onPress={() => {
-              lineupsStorage.clearData();
-              lineupsStorage.getLineupsTeams(game.getId());
-              // @ts-ignore
-              navigation.navigate(NavigatorConstants.MATCH_SCREEN, {
-                game: game,
-              });
-            }}>
+          <View>
             <View style={styles.wrapperInfo}>
               <Image
                 style={{width: 24, height: 24}}
@@ -87,12 +88,12 @@ export const FavoritesGameCardView = ({
               <Text
                 style={[styles.textPlyer]}>{`${game.getTeamsAwayName()}`}</Text>
             </View>
-          </TouchableOpacity>
+          </View>
 
           <Text
             style={[styles.textPlyer]}>{`${game.getTeamsAwayGoals()}`}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={0.9}
         onPress={() => game.setFavorite(false)}

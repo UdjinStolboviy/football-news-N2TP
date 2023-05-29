@@ -31,32 +31,31 @@ export class LineupsStorage {
         this.substitutesAway = [];
     }
 
-    @action
     public getCouchHome(): string {
         return this.couchHome;
     }
 
-    @action
+
     public getCouchAway(): string {
         return this.couchAway;
     }
 
-    @action
+
     public getTeamHome(): Player[] {
         return this.teamHome;
     }
 
-    @action
+
     public getTeamAway(): Player[] {
         return this.teamAway;
     }
 
-    @action
+
     public getSubstitutesHome(): Player[] {
         return this.substitutesHome;
     }
 
-    @action
+
     public getSubstitutesAway(): Player[] {
 
         return this.substitutesAway;
@@ -98,7 +97,9 @@ export class LineupsStorage {
                     name: item.player.name,
                     numberPlayer: item.player.number,
                 }
-                this.substitutesAway.push(new Player(playerData));
+                action(() => {
+                    this.substitutesAway.push(new Player(playerData));
+                })();
             }
             );
 
@@ -109,14 +110,15 @@ export class LineupsStorage {
         }
     }
 
-    @action
     public clearData() {
-        this.couchHome = '';
-        this.couchAway = '';
-        this.teamHome = [];
-        this.teamAway = [];
-        this.substitutesHome = [];
-        this.substitutesAway = [];
+        action(() => {
+            this.couchHome = '';
+            this.couchAway = '';
+            this.teamHome = [];
+            this.teamAway = [];
+            this.substitutesHome = [];
+            this.substitutesAway = [];
+        })();
     }
 
 

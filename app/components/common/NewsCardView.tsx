@@ -36,7 +36,15 @@ export const NewsCardView = ({news, index}: NewsCardViewProps) => {
   const colorBack = index % 2 !== 0 ? Colors.C9A9A9A : Colors.ACACACA;
 
   return (
-    <View style={[styles.container, {backgroundColor: colorBack}]}>
+    <TouchableOpacity
+      activeOpacity={0.9}
+      onPress={() =>
+        // @ts-ignore
+        navigation.navigate(NavigatorConstants.NEWS_SCREEN, {
+          url: news.getUrl(),
+        })
+      }
+      style={[styles.container, {backgroundColor: colorBack}]}>
       <Image
         style={{width: '35%', height: 88}}
         source={{uri: news.getUrlToImage()}}
@@ -63,19 +71,12 @@ export const NewsCardView = ({news, index}: NewsCardViewProps) => {
             marginRight: -5,
             marginTop: 5,
           }}>
-          <TouchableOpacity
-            onPress={() =>
-              // @ts-ignore
-              navigation.navigate(NavigatorConstants.NEWS_SCREEN, {
-                url: news.getUrl(),
-              })
-            }
-            style={styles.buttonRead}>
+          <View style={styles.buttonRead}>
             <Text style={styles.textButton}>Read</Text>
-          </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
