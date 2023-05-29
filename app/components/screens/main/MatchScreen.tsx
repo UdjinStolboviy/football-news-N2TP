@@ -47,7 +47,7 @@ export const MatchScreen = observer(
     const day = game.getDate().slice(8, 10);
     const time = game.getDate().slice(11, 16);
     const lineupsStorage: LineupsStorage = useInjection(Types.LineupsStorage);
-
+    const finish = true;
     const checkFavorite = () => {
       if (favorite) {
         return (
@@ -89,12 +89,20 @@ export const MatchScreen = observer(
           <ImageBackground
             style={styles.imageBack}
             source={require('../../../../assets/img/imgback.png')}>
-            <Text
-              style={[
-                styles.bigText,
-              ]}>{`${game.getTeamsHomeGoals()} : ${game.getTeamsAwayGoals()}`}</Text>
+            {finish ? (
+              <Text
+                style={[
+                  styles.bigText,
+                ]}>{`${game.getTeamsHomeGoals()} : ${game.getTeamsAwayGoals()}`}</Text>
+            ) : (
+              <Text style={[styles.bigText]}>{`- : -`}</Text>
+            )}
           </ImageBackground>
-          <Text style={styles.textStan}>FINISHED</Text>
+          {finish ? (
+            <Text style={styles.textStan}>FINISHED</Text>
+          ) : (
+            <Text style={styles.textStan}>PENDING</Text>
+          )}
           <TouchableOpacity
             onPress={() => game.setFavorite(!favorite)}
             style={styles.button}>
@@ -125,7 +133,7 @@ export const MatchScreen = observer(
                   </Text>
                 </View>
                 <View style={styles.teamAway}>
-                  <Text style={styles.textTeam}>
+                  <Text style={[styles.textTeam, {textAlign: 'right'}]}>
                     {lineupsStorage.getCouchAway()}
                   </Text>
                 </View>
@@ -149,7 +157,7 @@ export const MatchScreen = observer(
                   {lineupsStorage.getTeamAway().map((item: Player, index) => {
                     return (
                       <View key={index} style={styles.teamAway}>
-                        <Text style={styles.textTeam}>
+                        <Text style={[styles.textTeam, {textAlign: 'right'}]}>
                           {`${item.getName()}  ${item.getNumberPlayer()}`}
                         </Text>
                       </View>
@@ -180,7 +188,7 @@ export const MatchScreen = observer(
                     .map((item: Player, index) => {
                       return (
                         <View key={index} style={styles.teamAway}>
-                          <Text style={styles.textTeam}>
+                          <Text style={[styles.textTeam, {textAlign: 'right'}]}>
                             {`${item.getName()}  ${item.getNumberPlayer()}`}
                           </Text>
                         </View>
@@ -213,6 +221,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textTeam: {
+    width: 150,
     fontSize: 14,
     lineHeight: 16,
     color: Colors.OFOFOFO,
