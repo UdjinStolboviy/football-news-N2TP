@@ -64,7 +64,7 @@ export const MainScreen = observer(() => {
 
       <View
         style={{
-          paddingBottom: 50,
+          paddingBottom: 40,
           height: '50%',
           width: '100%',
         }}>
