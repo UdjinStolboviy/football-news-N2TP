@@ -24,13 +24,6 @@ import {Game} from '../../../mobx/dto/game';
 import {GameCardView} from '../../common/GameCardView';
 
 export const MainScreen = observer(() => {
-  const [
-    onEndReachedCalledDuringMomentum,
-    setOnEndReachedCalledDuringMomentum,
-  ] = useState(false);
-
-  const navigation = useNavigation();
-
   const newsStorage: NewsStorage = useInjection(Types.NewsStorage);
   const gameStorage: GameStorage = useInjection(Types.GameStorage);
 
@@ -41,10 +34,9 @@ export const MainScreen = observer(() => {
   const renderGameCard = (item: Game, index: number) => {
     return <GameCardView game={item} key={item.getId()} index={index} />;
   };
-  const paginationScreen = () => {
-    if (onEndReachedCalledDuringMomentum) {
-      return;
-    }
+
+  const getItemLayout1 = (data, index) => {
+    return {length: 88, offset: 88 * index, index};
   };
 
   return (
@@ -61,32 +53,32 @@ export const MainScreen = observer(() => {
         </View>
         <FlatList
           style={{width: '100%'}}
+          initialNumToRender={100}
+          windowSize={100}
           disableVirtualization
           data={newsStorage.getAllNews()}
           renderItem={({item, index}) => renderNewsCard(item, index)}
           showsVerticalScrollIndicator={false}
-          onMomentumScrollBegin={() =>
-            setOnEndReachedCalledDuringMomentum(false)
-          }
-          onEndReachedThreshold={1}
-          onEndReached={paginationScreen}
         />
       </View>
 
-      <View>
+      <View
+        style={{
+          paddingBottom: 50,
+          height: '50%',
+          width: '100%',
+        }}>
         <View style={styles.textWrapper}>
           <Text style={styles.bigText}>All Matches</Text>
         </View>
         <FlatList
           disableVirtualization
+          initialNumToRender={100}
+          windowSize={100}
+          getItemLayout={getItemLayout1}
           data={gameStorage.getAllGame()}
           renderItem={({item, index}) => renderGameCard(item, index)}
           showsVerticalScrollIndicator={false}
-          onMomentumScrollBegin={() =>
-            setOnEndReachedCalledDuringMomentum(false)
-          }
-          onEndReachedThreshold={1}
-          onEndReached={paginationScreen}
         />
       </View>
     </SafeAreaView>
