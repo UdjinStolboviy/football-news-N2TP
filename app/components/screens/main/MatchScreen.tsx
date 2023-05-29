@@ -128,12 +128,14 @@ export const MatchScreen = observer(
               </View>
               <View style={styles.infoWrapper}>
                 <View style={styles.teamHome}>
-                  <Text style={styles.textTeam}>
+                  <Text numberOfLines={1} style={styles.textTeam}>
                     {lineupsStorage.getCouchHome()}
                   </Text>
                 </View>
                 <View style={styles.teamAway}>
-                  <Text style={[styles.textTeam, {textAlign: 'right'}]}>
+                  <Text
+                    numberOfLines={1}
+                    style={[styles.textTeam, {textAlign: 'right'}]}>
                     {lineupsStorage.getCouchAway()}
                   </Text>
                 </View>
@@ -146,7 +148,7 @@ export const MatchScreen = observer(
                   {lineupsStorage.getTeamHome().map((item: Player, index) => {
                     return (
                       <View key={index} style={styles.teamHome}>
-                        <Text style={styles.textTeam}>
+                        <Text numberOfLines={1} style={styles.textTeam}>
                           {`${item.getNumberPlayer()}  ${item.getName()}`}
                         </Text>
                       </View>
@@ -157,7 +159,9 @@ export const MatchScreen = observer(
                   {lineupsStorage.getTeamAway().map((item: Player, index) => {
                     return (
                       <View key={index} style={styles.teamAway}>
-                        <Text style={[styles.textTeam, {textAlign: 'right'}]}>
+                        <Text
+                          numberOfLines={1}
+                          style={[styles.textTeam, {textAlign: 'right'}]}>
                           {`${item.getName()}  ${item.getNumberPlayer()}`}
                         </Text>
                       </View>
@@ -175,7 +179,7 @@ export const MatchScreen = observer(
                     .map((item: Player, index) => {
                       return (
                         <View key={index} style={styles.teamHome}>
-                          <Text style={styles.textTeam}>
+                          <Text numberOfLines={1} style={styles.textTeam}>
                             {`${item.getNumberPlayer()}  ${item.getName()}`}
                           </Text>
                         </View>
@@ -188,7 +192,9 @@ export const MatchScreen = observer(
                     .map((item: Player, index) => {
                       return (
                         <View key={index} style={styles.teamAway}>
-                          <Text style={[styles.textTeam, {textAlign: 'right'}]}>
+                          <Text
+                            numberOfLines={1}
+                            style={[styles.textTeam, {textAlign: 'right'}]}>
                             {`${item.getName()}  ${item.getNumberPlayer()}`}
                           </Text>
                         </View>
