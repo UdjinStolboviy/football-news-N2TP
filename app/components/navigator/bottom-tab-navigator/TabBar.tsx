@@ -3,7 +3,6 @@ import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {StyleSheet} from 'react-native';
 import {TabButton} from './TabBarButton';
 import {ComponentSize} from '../../../utils/component-size';
-import {Colors} from '../../../utils/colors';
 import {TabBarContainer} from './TabBarContainer';
 
 export const TabBar = (props: BottomTabBarProps) => {

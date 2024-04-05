@@ -5,4 +5,6 @@ export interface TransparentOverlayContext {
   changeOverlayVisibility?: (isVisible: boolean) => void;
 }
 
-export const TransparentOverlayContext = React.createContext({} as TransparentOverlayContext);
+export const TransparentOverlayContext = React.createContext(
+  {} as TransparentOverlayContext,
+);

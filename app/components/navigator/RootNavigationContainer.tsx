@@ -11,7 +11,6 @@ import {InitialNavigator} from './InitialNavigator';
 import {ErrorNavigator} from './ErrorNavigator';
 import {BottomTabNavigator} from './bottom-tab-navigator/BottomTabNavigator';
 import {NewsScreen} from '../screens/main/NewsScreen';
-import {MatchScreen} from '../screens/main/MatchScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -23,8 +22,6 @@ export const RootNavigationContainer = (
   props: RootNavigationContainerProps,
 ) => {
   const navigator: Navigator = useInjection(Types.Navigator);
-
-  console.log('RootNavigationContainer', props.initialRouteName);
 
   return (
     <NavigationContainer ref={ref => navigator.setNavigator(ref)}>

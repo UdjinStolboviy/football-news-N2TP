@@ -1,10 +1,9 @@
-import { injectable } from 'inversify';
-import { action, makeObservable, observable } from 'mobx';
-import { SharedValue } from 'react-native-reanimated';
+import {injectable} from 'inversify';
+import {makeObservable, observable} from 'mobx';
+import {SharedValue} from 'react-native-reanimated';
 
 @injectable()
 export class TabBarStorage {
-
   @observable private gestureProgressSharedValue: SharedValue<number> | null;
 
   constructor() {

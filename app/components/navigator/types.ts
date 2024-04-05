@@ -1,9 +1,6 @@
-
-import { NavigatorConstants } from '../../utils/navigator-constants';
-import { MatchScreenParams } from '../screens/main/MatchScreen';
-import { NewsScreenParams } from '../screens/main/NewsScreen';
-
-
+import {NavigatorConstants} from '../../utils/navigator-constants';
+import {MatchScreenParams} from '../screens/main/MatchScreen';
+import {NewsScreenParams} from '../screens/main/NewsScreen';
 
 export type RootStackParamList = {
   [NavigatorConstants.INITIAL_STACK]: undefined;
@@ -16,5 +13,4 @@ export type RootStackParamList = {
   [NavigatorConstants.FAVORITE_SCREEN]: undefined;
   [NavigatorConstants.MATCH_SCREEN]: MatchScreenParams;
   [NavigatorConstants.ERROR_SCREEN]: undefined;
-
 };

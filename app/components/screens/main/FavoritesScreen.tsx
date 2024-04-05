@@ -5,17 +5,14 @@ import {
   View,
   FlatList,
   StatusBar,
-  ActivityIndicator,
-  AppState,
   Platform,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {Colors} from '../../../utils/colors';
 import {useInjection} from 'inversify-react';
 import {Types} from '../../../ioc/types';
 import {observer} from 'mobx-react';
 import {HeaderView} from '../../common/HeaderView';
-import {useNavigation} from '@react-navigation/native';
 import {GameStorage} from '../../../mobx/storage/game-store';
 import {Game} from '../../../mobx/dto/game';
 import {FavoritesGameCardView} from '../../common/FavoritesGameCardView';
@@ -25,8 +22,6 @@ export const FavoritesScreen = observer(() => {
     onEndReachedCalledDuringMomentum,
     setOnEndReachedCalledDuringMomentum,
   ] = useState(false);
-
-  const navigation = useNavigation();
 
   const gameStorage: GameStorage = useInjection(Types.GameStorage);
 

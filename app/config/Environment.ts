@@ -1,6 +1,5 @@
 import Config from 'react-native-config';
-import { EnvConfig } from './env-config';
-
+import {EnvConfig} from './env-config';
 
 export class Environment {
   static getName(): string {

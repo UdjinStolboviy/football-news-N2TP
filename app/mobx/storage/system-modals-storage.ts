@@ -1,9 +1,8 @@
-import { injectable } from 'inversify';
-import { action, makeObservable, observable } from 'mobx';
+import {injectable} from 'inversify';
+import {action, makeObservable, observable} from 'mobx';
 
 @injectable()
 export class SystemModalsStorage {
-
   @observable private errorVisible: boolean;
   @observable private loaderVisible: boolean;
   @observable private isInit: boolean;

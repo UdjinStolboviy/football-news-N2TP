@@ -1,16 +1,12 @@
 import React from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
-import {ComponentSize} from '../../../utils/component-size';
 import {Colors} from '../../../utils/colors';
 import {observer} from 'mobx-react';
 import {useInjection} from 'inversify-react';
 import {Types} from '../../../ioc/types';
-import Animated from 'react-native-reanimated';
 import {Navigator} from '../../../service/navigator/navigator';
 import {NavigatorConstants} from '../../../utils/navigator-constants';
-
 import {useNavigation} from '@react-navigation/native';
-import {ButtonText} from '../../common/button/ButtonText';
 import {ButtonNawTab} from '../../common/button/ButtonNawTab';
 
 export interface TabBarContainerProps {

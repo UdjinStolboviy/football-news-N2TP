@@ -1,9 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import {
   AppState,
-  Image,
   NativeModules,
-  Platform,
   StatusBar,
   StyleSheet,
   Text,
@@ -15,14 +13,11 @@ import {observer} from 'mobx-react';
 import {InitializationStorage} from '../../../mobx/storage/initialization-storage';
 import {useInjection} from 'inversify-react';
 import {Types} from '../../../ioc/types';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 import {UIActivityIndicator} from 'react-native-indicators';
 import {NavigatorConstants} from '../../../utils/navigator-constants';
 import {Environment} from '../../../config/Environment';
-import {set} from 'mobx';
-
-const {StatusBarManager} = NativeModules;
 
 export const InitialScreen = observer(() => {
   const navigation = useNavigation();

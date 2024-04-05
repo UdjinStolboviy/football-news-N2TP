@@ -1,9 +1,8 @@
-import { action, makeObservable, observable } from 'mobx';
-import { injectable } from 'inversify';
+import {action, makeObservable, observable} from 'mobx';
+import {injectable} from 'inversify';
 
 @injectable()
 export class InitializationStorage {
-
   @observable private initializationSuccessful: boolean | null;
   @observable private started: boolean;
   @observable private progress: number;
@@ -14,7 +13,6 @@ export class InitializationStorage {
     this.started = false;
     this.progress = 0;
   }
-
 
   public getInitializationSuccessful(): boolean | null {
     return this.initializationSuccessful;

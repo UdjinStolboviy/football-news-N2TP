@@ -1,5 +1,4 @@
 import React from 'react';
-import {NavigatorConstants} from '../../../utils/navigator-constants';
 import {NavigationStorage} from '../../../mobx/storage/navigation-storage';
 import {useInjection} from 'inversify-react';
 import {Types} from '../../../ioc/types';

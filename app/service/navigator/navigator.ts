@@ -1,9 +1,8 @@
-import { injectable } from 'inversify';
-import { NavigationContainerRef } from '@react-navigation/core';
+import {injectable} from 'inversify';
+import {NavigationContainerRef} from '@react-navigation/core';
 
 @injectable()
 export class Navigator {
-
   private navigator: NavigationContainerRef<any> | null;
 
   public getNavigator(): NavigationContainerRef<any> | null {

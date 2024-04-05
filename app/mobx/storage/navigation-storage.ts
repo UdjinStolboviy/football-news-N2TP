@@ -1,9 +1,8 @@
-import { action, makeObservable, observable } from 'mobx';
-import { injectable } from 'inversify';
+import {action, makeObservable, observable} from 'mobx';
+import {injectable} from 'inversify';
 
 @injectable()
 export class NavigationStorage {
-
   @observable private currentTabRouteName: string | null;
 
   constructor() {

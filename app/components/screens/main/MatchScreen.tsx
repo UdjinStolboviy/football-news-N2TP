@@ -1,5 +1,4 @@
 import {
-  FlatList,
   Image,
   ImageBackground,
   Platform,
@@ -11,20 +10,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Colors} from '../../../utils/colors';
 import {useNavigation} from '@react-navigation/native';
-import {InitializationService} from '../../../service/initializer/initialization-service';
 import {useInjection} from 'inversify-react';
 import {Types} from '../../../ioc/types';
-import {InitializationStorage} from '../../../mobx/storage/initialization-storage';
 import {Game} from '../../../mobx/dto/game';
 import {HeaderView} from '../../common/HeaderView';
 import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParamList} from '../../navigator/types';
 import {NavigatorConstants} from '../../../utils/navigator-constants';
 import {observer} from 'mobx-react';
-import {IconFavorites} from '../../common/icon/IconFavorites';
 import {IconAddFavorites} from '../../common/icon/IconAddFavorites';
 import {IconSterFavorites} from '../../common/icon/IconStreFavor';
 import {LineupsStorage} from '../../../mobx/storage/lineups-store';

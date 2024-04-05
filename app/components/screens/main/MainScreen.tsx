@@ -5,17 +5,14 @@ import {
   View,
   FlatList,
   StatusBar,
-  ActivityIndicator,
-  AppState,
   Platform,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 import {Colors} from '../../../utils/colors';
 import {useInjection} from 'inversify-react';
 import {Types} from '../../../ioc/types';
 import {observer} from 'mobx-react';
 import {HeaderView} from '../../common/HeaderView';
-import {useNavigation} from '@react-navigation/native';
 import {NewsStorage} from '../../../mobx/storage/news-store';
 import {NewsCardView} from '../../common/NewsCardView';
 import {News} from '../../../mobx/dto/news';

@@ -1,5 +1,3 @@
-import { GameStorage } from './../mobx/storage/game-store';
-import { BestPlayers } from './../mobx/dto/best-players';
 export const Types = {
   Navigator: Symbol.for('Navigator'),
   EnvConfig: Symbol.for('EnvConfig'),

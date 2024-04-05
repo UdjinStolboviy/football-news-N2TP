@@ -5,11 +5,9 @@ import {
   View,
   FlatList,
   StatusBar,
-  ActivityIndicator,
-  AppState,
   Platform,
 } from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {Colors} from '../../../utils/colors';
 import {useInjection} from 'inversify-react';
 import {Types} from '../../../ioc/types';
@@ -25,8 +23,6 @@ export const BestPlayersScreen = observer(() => {
     onEndReachedCalledDuringMomentum,
     setOnEndReachedCalledDuringMomentum,
   ] = useState(false);
-
-  const navigation = useNavigation();
 
   const bestPlayersStorage: BestPlayersStorage = useInjection(
     Types.BestPlayersStorage,

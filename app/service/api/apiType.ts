@@ -1,6 +1,3 @@
 export abstract class IApiService {
-
-    abstract getPeople(): void;
-
-
+  abstract getPeople(): void;
 }
